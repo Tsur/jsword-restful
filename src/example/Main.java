@@ -22,7 +22,6 @@
  */
 
 package example;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Iterator;
@@ -51,7 +50,6 @@ import org.crosswire.jsword.book.OSISUtil;
 import org.crosswire.jsword.book.install.InstallException;
 import org.crosswire.jsword.book.install.InstallManager;
 import org.crosswire.jsword.book.install.Installer;
-import org.crosswire.jsword.index.lucene.LuceneIndex;
 import org.crosswire.jsword.index.search.DefaultSearchModifier;
 import org.crosswire.jsword.index.search.DefaultSearchRequest;
 import org.crosswire.jsword.passage.Key;
@@ -59,15 +57,8 @@ import org.crosswire.jsword.passage.NoSuchKeyException;
 import org.crosswire.jsword.passage.Passage;
 import org.crosswire.jsword.passage.PassageTally;
 import org.crosswire.jsword.passage.RestrictionType;
-import org.crosswire.jsword.util.ConverterFactory;
 import org.jdom.Content;
-import org.jdom.Element;
 import org.xml.sax.SAXException;
-
-import api.resources.Bible;
-
-import example.ConverterHTML;
-import example.ConverterTEXT;
 
 /**
  * All the methods in this class highlight some are of the API and how to use it.
@@ -133,17 +124,33 @@ public class Main
 
         BookData data = new BookData(book, key);
         
-        data.getOsisFragment().removeChild("title");
+        //data.getOsisFragment().removeChild("title");
 
-        /*for(Object s: data.getOsisFragment().getContent())
+        StringBuilder sb = new StringBuilder();
+        
+        int i = 0;
+        
+        for(Object s: data.getOsisFragment().getContent())
         {
         	Content e = (Content) s;
         	
-        	System.out.println(e.getValue());
-        }*/
+        	if(i % 2 == 0)
+        	{
+        		sb.append(e.getValue() + " -> ");
+        	}
+        	else
+        	{
+        		sb.append(e.getValue() + "\n");
+        	}
+        	
+        	i++;
+        	//System.out.println(e.getValue());
+        }
         
-        
-        return OSISUtil.getPlainText(data.getOsisFragment());
+        //System.out.println(sb.toString());
+        int len = sb.toString().length();
+        //return OSISUtil.getPlainText(data.getOsisFragment());
+        return sb.toString().substring(0, len-1);
     }
 
     /**
