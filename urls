@@ -1,0 +1,27 @@
+SCRIPTURES API
+
+#### <url>/bibles ####
+
+Devuelve todas las biblias instaladas en el formato indicado en la cabecera accept de la 
+solicitud GET HTTP
+
+Ejemplo para testear: 
+
+curl -H "accept: application/xml" <url>/bibles/
+curl -H "accept: application/json" <url>/bibles/
+
+#### <url>/bibles?format=xml ####
+
+Devuelve todas las biblias instaladas en formato xml
+
+#### <url>/bibles?format=json ####
+    
+Devuelve todas las biblias instaladas en formato json
+
+#### <url>/bibles/xml ####
+
+Devuelve todas las biblias instaladas en el formato xml
+
+#### <url>/bibles/json ####
+
+Devuelve todas las biblias instaladas en formato json
